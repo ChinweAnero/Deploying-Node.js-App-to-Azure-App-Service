@@ -19,7 +19,7 @@ jobs:
 
     - name: Azure Container Registry Login
       run: |
-        az acr login --name containerregistrychinwe
+        az acr login --name prodcontainerregistrychinwe
 
     - name: Build and Push Docker Image
       run: |
