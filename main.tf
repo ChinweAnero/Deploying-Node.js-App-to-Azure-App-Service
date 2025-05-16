@@ -25,7 +25,7 @@ module "resource_group" {
 #App service plan
 module "app_service_plan" {
   source = "./Infrastructure/Modules/App Service Plan"
-  App_service_name = "${var.environment}-App-service-plan"
+  App_service_name = "${var.environment}-app-service-plan"
   Rg_name = module.resource_group.resource_group_name
   App_service_location = var.App_service_location
 }
@@ -43,6 +43,6 @@ module "app_service" {
 module "Container_Registry" {
   source = "./Infrastructure/Modules/Azure Container Registry"
   location_of_resource_group = module.resource_group.resource_group_location
-  name = "${var.environment}ContainerRegistryChinwe"
+  name = "${var.environment}containerregistrychinwe"
   resource_group_name = module.resource_group.resource_group_name
 }
