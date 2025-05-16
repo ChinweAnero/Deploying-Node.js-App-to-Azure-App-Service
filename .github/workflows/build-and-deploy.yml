@@ -19,17 +19,17 @@ jobs:
 
     - name: Azure Container Registry Login
       run: |
-        az acr login --name prodContainerRegistryChinwe
+        az acr login --name containerregistrychinwe
 
     - name: Build and Push Docker Image
       run: |
-        docker build -t prodContainerRegistryChinwe.azurecr.io/app:latest .
-        docker push prodContainerRegistryChinwe.azurecr.io/app:latest
+        docker build -t prodcontainerregistrychinwe.azurecr.io/app:latest .
+        docker push prodcontainerregistrychinwe.azurecr.io/app:latest
 
     - name: Deploy to App Service
       run: |
         az webapp config container set \
           --name prod-app-service-chinwe \
           --resource-group App-Service-Rg \
-          --docker-custom-image-name prodContainerRegistryChinwe.azurecr.io/app:latest \
-          --docker-registry-server-url https://prodContainerRegistryChinwe.azurecr.io
+          --docker-custom-image-name prodcontainerregistrychinwe.azurecr.io/app:latest \
+          --docker-registry-server-url https://prodcontainerregistrychinwe.azurecr.io
