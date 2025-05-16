@@ -38,3 +38,11 @@ module "app_service" {
   service_plan_id     = module.app_service_plan.service-plan-id
   Service_plan_location = module.app_service_plan.Service-plan-location
 }
+
+#Containeer Registry
+module "Container_Registry" {
+  source = "./Infrastructure/Modules/Azure Container Registry"
+  location_of_resource_group = module.resource_group.resource_group_location
+  name = "${var.environment}ContainerRegistryChinwe"
+  resource_group_name = module.resource_group.resource_group_name
+}
