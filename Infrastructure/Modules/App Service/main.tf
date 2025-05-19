@@ -6,7 +6,8 @@ resource "azurerm_linux_web_app" "app" {
   service_plan_id     = var.service_plan_id
 
   site_config {
-    always_on = false
+    always_on = true
+
 
   }
 }
