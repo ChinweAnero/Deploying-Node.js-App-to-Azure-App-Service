@@ -1,5 +1,5 @@
 
-resource "azurerm_windows_web_app" "example" {
+resource "azurerm_linux_web_app" "app" {
   name                = var.name
   resource_group_name = var.resource_group_name
   location            = var.Service_plan_location
