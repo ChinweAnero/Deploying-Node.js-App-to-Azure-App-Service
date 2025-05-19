@@ -4,8 +4,13 @@ terraform {
       source  = "hashicorp/azurerm"
       version = ">=4.29.0"
     }
+     azuread = {
+      source = "hashicorp/azuread"
+      version = "3.4.0"
+    }
   }
 }
+provider "azuread" {}
 
 # Configure the Microsoft Azure Provider
 provider "azurerm" {
@@ -46,3 +51,14 @@ module "Container_Registry" {
   name = "${var.environment}containerregistrychinwe"
   resource_group_name = module.resource_group.resource_group_name
 }
+
+# data "azurerm_subscription" "current" {}
+#
+# #Creating Service Principles
+# module "service_principal" {
+#   source = "./Infrastructure/Modules/Active Directory"
+#   application_id = var.application_id
+#   client_id      = var.client_id
+#   display_name   = var.display_name
+#   principal_id = var.principal_id
+# }

@@ -33,3 +33,9 @@ jobs:
           --resource-group App-Service-Rg \
           --docker-custom-image-name prodcontainerregistrychinwe.azurecr.io/app:latest \
           --docker-registry-server-url https://prodcontainerregistrychinwe.azurecr.io
+
+    - name: Restart App Service
+      run: |
+        az webapp restart \
+          --name prod-app-service-chinwe \
+          --resource-group App-Service-Rg

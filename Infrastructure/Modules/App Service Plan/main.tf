@@ -3,5 +3,5 @@ resource "azurerm_service_plan" "service-plan" {
   resource_group_name = var.Rg_name
   location            = var.App_service_location
   os_type             = "Linux"
-  sku_name            = "F1"
+  sku_name            = "B1"
 }
