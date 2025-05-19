@@ -1,18 +1,15 @@
-# Use Node.js base image
 FROM node:18-alpine
 
-# Set working directory
 WORKDIR /app
 
-# Install dependencies
-COPY ./app/package.json ./
+COPY ./app/package*.json ./
 RUN npm install
 
-# Copy app files
-COPY app/ ./
+COPY ./app ./
 
-# Expose port
 EXPOSE 3000
 
-# Start app
+HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
+  CMD wget -q --spider http://localhost:3000/health || exit 1
+
 CMD ["npm", "start"]
