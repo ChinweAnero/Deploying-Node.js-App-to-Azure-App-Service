@@ -52,13 +52,10 @@ module "Container_Registry" {
   resource_group_name = module.resource_group.resource_group_name
 }
 
-# data "azurerm_subscription" "current" {}
-#
-# #Creating Service Principles
-# module "service_principal" {
-#   source = "./Infrastructure/Modules/Active Directory"
-#   application_id = var.application_id
-#   client_id      = var.client_id
-#   display_name   = var.display_name
-#   principal_id = var.principal_id
-# }
+# Azure Front Door Profile Profile
+module "front_door_profile" {
+  source = "Infrastructure/Modules/Azure Front Door Profile"
+  cdn_frontdoor_profile_id = ""
+  frontdoor_profile_name   = ""
+  resource_group_name      = ""
+}
