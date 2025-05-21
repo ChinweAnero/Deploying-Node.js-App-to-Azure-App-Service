@@ -1,6 +1,6 @@
 resource "azurerm_cdn_frontdoor_origin" "frontdoor_origin" {
   name                          = var.frontdoor_origin_name
-  cdn_frontdoor_origin_group_id = var.cdn_frontdoor_profile_id
+  cdn_frontdoor_origin_group_id = var.frontdoor_origin_group_id
   enabled                       = true
 
   certificate_name_check_enabled = false

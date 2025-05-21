@@ -54,8 +54,46 @@ module "Container_Registry" {
 
 # Azure Front Door Profile Profile
 module "front_door_profile" {
-  source = "Infrastructure/Modules/Azure Front Door Profile"
-  cdn_frontdoor_profile_id = ""
-  frontdoor_profile_name   = ""
-  resource_group_name      = ""
+  source = "./Infrastructure/Modules/Azure Front Door Profile"
+  frontdoor_profile_name   = "${var.environment}FrontdoorProfile"
+  resource_group_name      = module.resource_group.resource_group_name
+}
+#Azure front door endpoint
+module "Frontdoor_endpoint" {
+  source = "./Infrastructure/Modules/Azure Frontdoor Endpoint"
+  cdn_frontdoor_profile_id = module.front_door_profile.cdn_frontdoor_profile_id
+  frontdoor_endpoint_name = "${var.environment}FrontdoorEndpoint"
+}
+
+#frontdoor origin group
+module "frontdoor_origin_group" {
+  source = "./Infrastructure/Modules/Azure Frontdoor Origin Group"
+  cdn_frontdoor_profile_id = module.front_door_profile.cdn_frontdoor_profile_id
+  frontdoor_origin_group_name = "${var.environment}FrontdoorOriginGroup"
+}
+
+
+#Azure frontdoor origin
+module "frontdoor_origin" {
+  source = "./Infrastructure/Modules/Azure Frontdoor Origin"
+  frontdoor_origin_name = "${var.environment}FrontdoorOrigin"
+  host_name = module.app_service.app_service_default_hostname
+  origin_host_header = module.app_service.app_service_default_hostname
+  frontdoor_origin_group_id = module.frontdoor_origin_group.cdn_frontdoor_origin_group_id
+}
+#Azure frontdoor ruleset
+module "frontdoor_rule_set" {
+  source = "./Infrastructure/Modules/Azure Frontdoor Rule Set"
+  cdn_frontdoor_profile_id = module.front_door_profile.cdn_frontdoor_profile_id
+  frontdoor_rule_set_name  = "${var.environment}FrontdoorRuleSet"
+}
+
+#Azure frontdoor Route
+module "frontdoor_route" {
+  source = "./Infrastructure/Modules/Azure Frontdoor Route"
+  cdn_frontdoor_endpoint_id = module.Frontdoor_endpoint.frontdoor_endpoint_id
+  cdn_frontdoor_origin_group_id = module.frontdoor_origin_group.cdn_frontdoor_origin_group_id
+  cdn_frontdoor_origin_ids = [module.frontdoor_origin.frontdoor_origin_id]
+  cdn_frontdoor_rule_set_ids = [module.frontdoor_rule_set.cdn_frontdoor_rule_set_ids]
+  route_name = "${var.environment}FrontdoorRoute"
 }
