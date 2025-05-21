@@ -10,7 +10,7 @@ variable "origin_host_header" {
   type = string
   description = "host header(app service)"
 }
-variable "cdn_frontdoor_profile_id" {
+variable "frontdoor_origin_group_id" {
   type = string
   description = "id of the frontdoor profile"
 }

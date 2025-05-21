@@ -15,6 +15,6 @@ variable "cdn_frontdoor_origin_ids" {
   description = "origin ids"
 }
 variable "cdn_frontdoor_rule_set_ids" {
-  type = string
+  type = set(string)
   description = "rule set ids"
 }

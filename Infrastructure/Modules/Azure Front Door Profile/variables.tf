@@ -7,7 +7,7 @@ variable "resource_group_name" {
   description = ""
 }
 
-variable "cdn_frontdoor_profile_id" {
-  type = string
-  description = "id of the frontdoor profile"
-}
+# variable "cdn_frontdoor_profile_id" {
+#   type = string
+#   description = "id of the frontdoor profile"
+# }
