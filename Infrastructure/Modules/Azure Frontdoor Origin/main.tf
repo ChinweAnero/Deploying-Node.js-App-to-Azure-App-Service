@@ -3,7 +3,7 @@ resource "azurerm_cdn_frontdoor_origin" "frontdoor_origin" {
   cdn_frontdoor_origin_group_id = var.frontdoor_origin_group_id
   enabled                       = true
 
-  certificate_name_check_enabled = false
+  certificate_name_check_enabled = true
 
   host_name          = var.host_name
   http_port          = 80
