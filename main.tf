@@ -96,6 +96,7 @@ module "frontdoor_route" {
   cdn_frontdoor_origin_ids = [module.frontdoor_origin.frontdoor_origin_id]
   cdn_frontdoor_rule_set_ids = [module.frontdoor_rule_set.cdn_frontdoor_rule_set_ids]
   route_name                    = "${var.environment}FrontdoorRoute"
+  cdn_frontdoor_custom_domain_ids = [module.fd_custom_dns.frontdoor_custom_domain_id]
 }
 
 #Azure dns zone
@@ -103,7 +104,7 @@ module "azure_dns_zone" {
   source = "./Infrastructure/Modules/Azure DNS Zone"
   resource_group_name = module.resource_group.resource_group_name
 }
-#Azure frontdoor custom dns
+#Azure frontdoor custom domain
 module "fd_custom_dns" {
   source = "./Infrastructure/Modules/Azure Frontdoor Custom Domain"
   cdn_frontdoor_profile_id = module.front_door_profile.cdn_frontdoor_profile_id
