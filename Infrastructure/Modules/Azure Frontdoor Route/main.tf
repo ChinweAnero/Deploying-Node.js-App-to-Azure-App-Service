@@ -11,7 +11,8 @@ resource "azurerm_cdn_frontdoor_route" "frontdoor_route" {
   patterns_to_match      = ["/*"]
   supported_protocols    = ["Http", "Https"]
 
-  cdn_frontdoor_custom_domain_ids = []
-  link_to_default_domain          = true
+  cdn_frontdoor_custom_domain_ids = var.cdn_frontdoor_custom_domain_ids
+  link_to_default_domain          = false
+
 
 }

@@ -18,3 +18,7 @@ variable "cdn_frontdoor_rule_set_ids" {
   type = set(string)
   description = "rule set ids"
 }
+variable "cdn_frontdoor_custom_domain_ids" {
+  type = list(string)
+  description = "custom domains to route to"
+}
