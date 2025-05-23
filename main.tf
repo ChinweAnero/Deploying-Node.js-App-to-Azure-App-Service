@@ -90,10 +90,29 @@ module "frontdoor_rule_set" {
 
 #Azure frontdoor Route
 module "frontdoor_route" {
-  source = "./Infrastructure/Modules/Azure Frontdoor Route"
-  cdn_frontdoor_endpoint_id = module.Frontdoor_endpoint.frontdoor_endpoint_id
+  source                        = "./Infrastructure/Modules/Azure Frontdoor Route"
+  cdn_frontdoor_endpoint_id     = module.Frontdoor_endpoint.frontdoor_endpoint_id
   cdn_frontdoor_origin_group_id = module.frontdoor_origin_group.cdn_frontdoor_origin_group_id
   cdn_frontdoor_origin_ids = [module.frontdoor_origin.frontdoor_origin_id]
   cdn_frontdoor_rule_set_ids = [module.frontdoor_rule_set.cdn_frontdoor_rule_set_ids]
-  route_name = "${var.environment}FrontdoorRoute"
+  route_name                    = "${var.environment}FrontdoorRoute"
+}
+
+#Azure dns zone
+module "azure_dns_zone" {
+  source = "./Infrastructure/Modules/Azure DNS Zone"
+  resource_group_name = module.resource_group.resource_group_name
+}
+#Azure frontdoor custom dns
+module "fd_custom_dns" {
+  source = "./Infrastructure/Modules/Azure Frontdoor Custom Domain"
+  cdn_frontdoor_profile_id = module.front_door_profile.cdn_frontdoor_profile_id
+  custom_domain_name = "${var.environment}customDomain"
+  dns_zone_id = module.azure_dns_zone.dns_zone_id
+}
+#Azure custom dns domain association
+module "fd_custom_dns_association" {
+  source = "./Infrastructure/Modules/Frontdoor Custom Domain Association"
+  cdn_frontdoor_custom_domain_id = module.fd_custom_dns.frontdoor_custom_domain_id
+  cdn_frontdoor_route_ids = [module.frontdoor_route.frontdoor_route_id]
 }
