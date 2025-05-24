@@ -117,3 +117,25 @@ module "fd_custom_dns_association" {
   cdn_frontdoor_custom_domain_id = module.fd_custom_dns.frontdoor_custom_domain_id
   cdn_frontdoor_route_ids = [module.frontdoor_route.frontdoor_route_id]
 }
+
+#Log Analytics
+module "log_analytics" {
+  source = "./Infrastructure/Modules/Azure Log Analytics"
+  log_analytics_name = "${var.environment}logAnalytics"
+  name_of_resource_group = module.resource_group.resource_group_name
+  resource_group_location = module.resource_group.resource_group_location
+}
+#Azure monitor for App service
+module "app_service_monitoring" {
+  source = "./Infrastructure/Modules/Azure Monitor"
+  azure_monitor_name = "${var.environment}appservicemonitor"
+  log_analytics_workspace_id = module.log_analytics.log_analytics_workspace_id
+  target_resource_id = module.app_service.web_app_id
+}
+#Azure monitor for frontdoor
+module "frontdoor_monitoring" {
+  source = "./Infrastructure/Modules/Azure Monitor"
+  azure_monitor_name = "${var.environment}frontdoormonitor"
+  log_analytics_workspace_id = module.log_analytics.log_analytics_workspace_id
+  target_resource_id = module.front_door_profile.cdn_frontdoor_profile_id
+}
