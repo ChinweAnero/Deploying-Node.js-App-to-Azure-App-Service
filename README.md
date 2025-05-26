@@ -53,7 +53,7 @@ The Deployment Pipeline does: on push to main branch
 
 
 
-#Architecture Summary
+# Architecture Summary
 
 User --> Front Door --> App Service (Linux)  
     \--> Custom Domain used:(www.chinwetechhub.com)
