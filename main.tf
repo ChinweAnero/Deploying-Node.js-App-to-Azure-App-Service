@@ -139,14 +139,14 @@ module "log_analytics" {
 }
 #Azure monitor for App service
 module "app_service_monitoring" {
-  source = "./Infrastructure/Modules/Azure Monitor"
+  source = "Infrastructure/Modules/Azure Monitor Diagnostics Settings"
   azure_monitor_name = "${var.environment}appservicemonitor"
   log_analytics_workspace_id = module.log_analytics.log_analytics_workspace_id
   target_resource_id = module.app_service.web_app_id
 }
 #Azure monitor for frontdoor
 module "frontdoor_monitoring" {
-  source = "./Infrastructure/Modules/Azure Monitor"
+  source = "Infrastructure/Modules/Azure Monitor Diagnostics Settings"
   azure_monitor_name = "${var.environment}frontdoormonitor"
   log_analytics_workspace_id = module.log_analytics.log_analytics_workspace_id
   target_resource_id = module.front_door_profile.cdn_frontdoor_profile_id
