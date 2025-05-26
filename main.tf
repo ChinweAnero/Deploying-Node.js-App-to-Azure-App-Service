@@ -1,4 +1,15 @@
+# The configuration for the `remote` backend.
 terraform {
+  backend "remote" {
+    # The name of your Terraform Cloud organization.
+    organization = "Chinwe-Org"
+
+    workspaces {
+         name = "Azure-App-Service-1"
+       }
+     }
+
+ #providers
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
@@ -19,6 +30,7 @@ provider "azurerm" {
    use_cli = true
 
 }
+
 
 #resource group module
 module "resource_group" {
