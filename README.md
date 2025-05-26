@@ -1,2 +1,2 @@
 # Deploy_App_in_Azure
-testing new improved cli
+Read me comment to test new pipeline improvement
