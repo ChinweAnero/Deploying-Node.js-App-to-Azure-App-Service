@@ -1,8 +1,9 @@
-name: Build, Push to ACR, and Deploy to App Service
+name: Build, Push to Azure Container Registry, and Deploy to App Service
 
 on:
   push:
-    branches: [main]
+    branches: [ "main" ]
+  pull_request:
 
 jobs:
   build-and-deploy:
