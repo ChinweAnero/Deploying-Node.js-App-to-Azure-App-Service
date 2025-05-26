@@ -1,3 +1,2 @@
 # Deploy_App_in_Azure
-Pipeline Test
-Pipeline test2
+Read me comment to test new pipeline improvement
